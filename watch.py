@@ -105,7 +105,21 @@ def build_report_message(deals_by_product: Dict[str, List[Deal]], news_items: Li
     return "\n".join(lines)
 
 
+def load_dotenv(env_path=".env"):
+    if os.path.exists(env_path):
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    k = k.strip()
+                    v = v.strip().strip("'\"")
+                    if k and k not in os.environ:
+                        os.environ[k] = v
+
+
 def run_daily_watch(force: bool = False):
+    load_dotenv()
     token = (os.environ.get("TELEGRAM_TOKEN") or os.environ.get("BOTTOKEN") or "").strip()
     chat_id = (os.environ.get("TELEGRAM_CHAT_ID") or os.environ.get("CHATID") or "").strip()
     gemini_key = (os.environ.get("GEMINI_API_KEY") or os.environ.get("GEMINIAPI") or "").strip()
