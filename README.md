@@ -78,18 +78,11 @@ flowchart TD
 3. Fes clic a **Get API key** → **Create API key**.
 4. Copia la clau generada. Aquesta serà la teva `GEMINI_API_KEY`.
 
-### Pas 3: Crear el repositori a GitHub i configurar els Secrets
-1. Crea un nou repositori a GitHub (per exemple `chollows`). Pot ser públic (minuts de GitHub Actions 100% il·limitats) o privat.
-2. Puja aquest codi al repositori:
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: inicialització assistent Chollows"
-   git branch -M main
-   git remote add origin https://github.com/EL_TEU_USUARI/chollows.git
-   git push -u origin main
-   ```
-3. Al teu repositori de GitHub, ves a:
+### Pas 3: Configurar els Secrets al teu repositori de GitHub
+El codi ja està inicialitzat i pujat al teu repositori: **[1Amolina1/chollows-bot](https://github.com/1Amolina1/chollows-bot)**.
+
+Ara només cal que configuris els secrets necessaris:
+1. Al teu repositori [1Amolina1/chollows-bot](https://github.com/1Amolina1/chollows-bot), ves a:
    **Settings** → **Secrets and variables** → **Actions** → **New repository secret**.
 4. Afegeix els següents tres secrets:
    - `TELEGRAM_TOKEN`: El token del teu bot de @BotFather.
