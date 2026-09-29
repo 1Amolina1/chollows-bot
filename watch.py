@@ -110,9 +110,24 @@ def run_daily_watch(force: bool = False):
     chat_id = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
     gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
 
-    if not token or not chat_id:
-        logger.error("FATAL: Cal configurar TELEGRAM_TOKEN i TELEGRAM_CHAT_ID!")
+    missing = []
+    if not token:
+        missing.append("TELEGRAM_TOKEN")
+    if not chat_id:
+        missing.append("TELEGRAM_CHAT_ID")
+
+    if missing:
+        logger.error(
+            f"FATAL: Falten els següents secrets de GitHub: {', '.join(missing)}\n"
+            f"👉 Afegeix-los a: https://github.com/1Amolina1/chollows-bot/settings/secrets/actions\n"
+            f"ℹ️ Assegura't de crear-los com a 'Repository secrets' (no 'Environment secrets') i amb el nom exacte."
+        )
         sys.exit(1)
+
+    if not gemini_key:
+        logger.warning(
+            "GEMINI_API_KEY no detectada als secrets. S'utilitzarà el generador estàtic de regles i diccionari."
+        )
 
     if not is_scheduled_time_madrid(force=force):
         return
