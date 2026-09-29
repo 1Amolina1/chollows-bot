@@ -118,6 +118,7 @@ class WallapopConnector(BaseConnector):
         - order_by='price_low_to_high'
         - time_filter='today' per a anuncis recents
         """
+        # pyrefly: ignore [missing-import]
         from wallapy import check_wallapop
 
         keywords = query.split()
