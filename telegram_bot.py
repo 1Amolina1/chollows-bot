@@ -187,8 +187,12 @@ class BotHandler:
             self._send_welcome(chat_id)
             return
 
-        # 2. Comanda per veure la llista de seguiment
-        if lower_text in ["mostra què em segueixes", "mostra que em segueixes", "què em segueixes", "que em segueixes", "/llista", "llista", "/productes", "productes"]:
+        # 2. Comanda per veure la llista de seguiment (flexible)
+        m_list = (
+            re.search(r"(?:mostra|veure|enseny[a-z\']*|llista|qu[eè]).*(?:segueixes|productes|llista|guardat)", lower_text)
+            or lower_text in ["/llista", "llista", "/productes", "productes", "status", "/status"]
+        )
+        if m_list and not lower_text.startswith("mostra temes") and not lower_text.startswith("mostra ciutat"):
             self._send_tracked_list(chat_id)
             return
 
