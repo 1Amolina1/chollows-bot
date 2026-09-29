@@ -1,0 +1,37 @@
+{
+  "products": [
+    {
+      "name": "iPhone 15 Pro",
+      "max_price": 750.0,
+      "alternative_names": [
+        "Apple iPhone 15 Pro",
+        "iPhone 15Pro",
+        "15 Pro"
+      ]
+    },
+    {
+      "name": "PlayStation 5",
+      "max_price": 380.0,
+      "alternative_names": [
+        "PS5",
+        "Sony PS5",
+        "PlayStation 5 Slim",
+        "PS5 Slim"
+      ]
+    },
+    {
+      "name": "MacBook Air M2",
+      "max_price": 800.0,
+      "alternative_names": [
+        "Apple MacBook Air M2",
+        "MacBook Air",
+        "Macbook M2"
+      ]
+    }
+  ],
+  "topics": [
+    "Intel·ligència Artificial",
+    "Apple",
+    "Ciberseguretat"
+  ]
+}

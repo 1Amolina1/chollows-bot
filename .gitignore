@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv/
+env/
+venv/
+*.log
+
+# Assegurem que la base de dades SQLite es mantingui al repositori per a la persistència
+!data/data.db
