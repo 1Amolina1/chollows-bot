@@ -106,15 +106,15 @@ def build_report_message(deals_by_product: Dict[str, List[Deal]], news_items: Li
 
 
 def run_daily_watch(force: bool = False):
-    token = os.environ.get("TELEGRAM_TOKEN", "").strip()
-    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
-    gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    token = (os.environ.get("TELEGRAM_TOKEN") or os.environ.get("BOTTOKEN") or "").strip()
+    chat_id = (os.environ.get("TELEGRAM_CHAT_ID") or os.environ.get("CHATID") or "").strip()
+    gemini_key = (os.environ.get("GEMINI_API_KEY") or os.environ.get("GEMINIAPI") or "").strip()
 
     missing = []
     if not token:
-        missing.append("TELEGRAM_TOKEN")
+        missing.append("TELEGRAM_TOKEN (o BOTTOKEN)")
     if not chat_id:
-        missing.append("TELEGRAM_CHAT_ID")
+        missing.append("TELEGRAM_CHAT_ID (o CHATID)")
 
     if missing:
         logger.error(

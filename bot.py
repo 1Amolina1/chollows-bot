@@ -15,12 +15,12 @@ logger = logging.getLogger("chollows.bot")
 
 
 def run_bot(drain_only: bool = False):
-    token = os.environ.get("TELEGRAM_TOKEN", "").strip()
-    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
-    gemini_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    token = (os.environ.get("TELEGRAM_TOKEN") or os.environ.get("BOTTOKEN") or "").strip()
+    chat_id = (os.environ.get("TELEGRAM_CHAT_ID") or os.environ.get("CHATID") or "").strip()
+    gemini_key = (os.environ.get("GEMINI_API_KEY") or os.environ.get("GEMINIAPI") or "").strip()
 
     if not token:
-        logger.error("FATAL: Variable d'entorn TELEGRAM_TOKEN no trobada!")
+        logger.error("FATAL: Variable d'entorn TELEGRAM_TOKEN (o BOTTOKEN) no trobada!")
         sys.exit(1)
 
     client = TelegramClient(token)

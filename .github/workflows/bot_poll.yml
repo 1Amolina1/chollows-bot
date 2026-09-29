@@ -32,9 +32,12 @@ jobs:
 
       - name: 💬 Processar missatges pendents de Telegram
         env:
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_TOKEN: ${{ secrets.BOTTOKEN || secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.CHATID || secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINIAPI || secrets.GEMINI_API_KEY }}
+          BOTTOKEN: ${{ secrets.BOTTOKEN }}
+          CHATID: ${{ secrets.CHATID }}
+          GEMINIAPI: ${{ secrets.GEMINIAPI }}
         run: |
           python bot.py --drain
 
