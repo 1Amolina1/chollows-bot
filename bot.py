@@ -27,8 +27,40 @@ def load_dotenv(env_path=".env"):
                         os.environ[k] = v
 
 
+import http.server
+import threading
+
+
+class HealthHandler(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        self.wfile.write(b'{"status": "running", "service": "chollows-bot"}')
+
+    def log_message(self, format, *args):
+        pass
+
+
+def start_health_server(port: int):
+    try:
+        server = http.server.HTTPServer(("0.0.0.0", port), HealthHandler)
+        t = threading.Thread(target=server.serve_forever, daemon=True)
+        t.start()
+        logger.info(f"Servidor HTTP de salut actiu al port {port} (compatible amb Render.com / Koyeb)")
+    except Exception as e:
+        logger.warning(f"No s'ha pogut iniciar el servidor HTTP al port {port}: {e}")
+
+
 def run_bot(drain_only: bool = False):
     load_dotenv()
+    port_env = os.environ.get("PORT")
+    if port_env:
+        try:
+            start_health_server(int(port_env))
+        except ValueError:
+            pass
+
     token = (os.environ.get("TELEGRAM_TOKEN") or os.environ.get("BOTTOKEN") or "").strip()
     chat_id = (os.environ.get("TELEGRAM_CHAT_ID") or os.environ.get("CHATID") or "").strip()
     gemini_key = (os.environ.get("GEMINI_API_KEY") or os.environ.get("GEMINIAPI") or "").strip()

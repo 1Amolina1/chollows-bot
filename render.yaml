@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: chollows-bot
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    autoDeploy: true
+    envVars:
+      - key: BOTTOKEN
+        sync: false
+      - key: CHATID
+        sync: false
+      - key: GEMINIAPI
+        sync: false
